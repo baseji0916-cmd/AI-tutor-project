@@ -1,0 +1,57 @@
+# GrowthPilot — Render Blueprint
+# Deploy: https://dashboard.render.com → New → Blueprint → connect repo
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ── Backend API (FastAPI + LangGraph) ──
+  - type: web
+    name: growthpilot-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt -r requirements-ai.txt
+    startCommand: bash scripts/start.sh
+    healthCheckPath: /api/v1/health
+    plan: free
+    disk:
+      name: growthpilot-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: DATABASE_URL
+        value: sqlite:////var/data/growthpilot.db
+      - key: SECRET_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: CORS_ORIGINS
+        fromService:
+          type: web
+          name: growthpilot-web
+          property: host
+
+  # ── Frontend (React PWA static site) ──
+  - type: web
+    name: growthpilot-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    plan: free
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: growthpilot-api
+          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

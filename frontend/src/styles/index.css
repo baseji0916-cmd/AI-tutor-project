@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-surface: #fafafa;
+  --color-surface-elevated: #ffffff;
+  --color-surface-muted: #f4f4f5;
+  --color-border: #e4e4e7;
+  --color-text: #09090b;
+  --color-text-muted: #71717a;
+  --color-accent: #0071e3;
+  --color-accent-hover: #0077ed;
+  --color-success: #34c759;
+  --color-warning: #ff9f0a;
+}
+
+.dark {
+  --color-surface: #0a0a0a;
+  --color-surface-elevated: #141414;
+  --color-surface-muted: #1c1c1e;
+  --color-border: #2c2c2e;
+  --color-text: #fafafa;
+  --color-text-muted: #a1a1aa;
+  --color-accent: #0a84ff;
+  --color-accent-hover: #409cff;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-surface text-text font-sans min-h-dvh;
+    letter-spacing: -0.01em;
+  }
+
+  #root {
+    @apply min-h-dvh;
+  }
+}
+
+/* Apple-style frosted glass cards */
+.glass-panel {
+  @apply bg-surface-elevated/80 backdrop-blur-2xl border border-border/60;
+}
+
+@utility bg-surface {
+  background-color: var(--color-surface);
+}
+
+@utility bg-surface-elevated {
+  background-color: var(--color-surface-elevated);
+}
+
+@utility bg-surface-muted {
+  background-color: var(--color-surface-muted);
+}
+
+@utility border-border {
+  border-color: var(--color-border);
+}
+
+@utility text-text {
+  color: var(--color-text);
+}
+
+@utility text-text-muted {
+  color: var(--color-text-muted);
+}
+
+@utility text-accent {
+  color: var(--color-accent);
+}
+
+@utility bg-accent {
+  background-color: var(--color-accent);
+}
+
+@utility bg-accent-hover {
+  background-color: var(--color-accent-hover);
+}
