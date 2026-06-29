@@ -1,4 +1,4 @@
-# GrowthPilot
+# GrowthPilot (AI-tutor-project)
 
 **AI Growth Coach** — LangGraph Multi-Agent 기반 목표 분석, 계획 생성, 실행 관리, 성장 예측 서비스
 
