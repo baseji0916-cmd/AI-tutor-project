@@ -38,11 +38,28 @@ export async function apiRequest<T>(
     }
   }
 
-  const response = await fetch(`${getApiBaseUrl()}${path}`, {
-    ...rest,
-    headers,
-    body: body !== undefined ? JSON.stringify(body) : undefined,
-  });
+  const url = `${getApiBaseUrl()}${path}`;
+
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      ...rest,
+      headers,
+      body: body !== undefined ? JSON.stringify(body) : undefined,
+    });
+  } catch {
+    throw new ApiClientError(
+      "서버에 연결할 수 없습니다. API 서버 상태를 확인해 주세요.",
+      0,
+    );
+  }
+
+  if (response.status === 503) {
+    throw new ApiClientError(
+      "API 서버가 일시 중지되었습니다. Render Dashboard에서 서비스를 Resume한 뒤 다시 시도해 주세요.",
+      503,
+    );
+  }
 
   if (response.status === 401 && auth) {
     clearStoredToken();

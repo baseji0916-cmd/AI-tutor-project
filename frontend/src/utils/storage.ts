@@ -12,14 +12,15 @@ export function clearStoredToken(): void {
   localStorage.removeItem(TOKEN_KEY);
 }
 
-/** Render production API (fallback when VITE_API_BASE_URL is unset at build time). */
+/** Render production API (direct calls when proxy is disabled). */
 const PRODUCTION_API_BASE_URL = "https://growthpilot-api.onrender.com";
 
 export function getApiBaseUrl(): string {
-  // Vite dev server proxies /api, /auth, /goal to the backend
-  if (import.meta.env.DEV) {
+  // Dev + Vercel production proxy: same-origin (/api, /auth, /goal → Render)
+  if (import.meta.env.DEV || import.meta.env.VITE_USE_API_PROXY === "true") {
     return "";
   }
+
   const raw =
     import.meta.env.VITE_API_BASE_URL ??
     (import.meta.env.PROD ? PRODUCTION_API_BASE_URL : "http://localhost:8000");
@@ -27,7 +28,6 @@ export function getApiBaseUrl(): string {
   if (!trimmed || trimmed === "http://localhost:8000") {
     return PRODUCTION_API_BASE_URL;
   }
-  // Render blueprint may inject hostname only (no scheme)
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
     return trimmed;
   }
