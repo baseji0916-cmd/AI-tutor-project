@@ -8,7 +8,7 @@ services:
     name: growthpilot-api
     runtime: python
     rootDir: backend
-    buildCommand: pip install -r requirements.txt -r requirements-ai.txt
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python scripts/verify_deploy.py
     startCommand: bash scripts/start.sh
     healthCheckPath: /api/v1/health
     plan: free

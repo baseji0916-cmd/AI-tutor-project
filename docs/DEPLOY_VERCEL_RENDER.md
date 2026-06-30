@@ -23,7 +23,7 @@
 
 1. **New +** → **Web Service** → 저장소 연결
 2. Root Directory: `backend`
-3. Build: `pip install -r requirements.txt -r requirements-ai.txt`
+3. Build: `pip install --upgrade pip && pip install -r requirements.txt`
 4. Start: `bash scripts/start.sh`
 5. Plan: **Free**
 

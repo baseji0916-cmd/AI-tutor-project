@@ -28,8 +28,8 @@ growthpilot/
 │   ├── scripts/
 │   │   ├── start.sh            # Render production startup
 │   │   └── verify_deploy.py    # Local verification
-│   ├── requirements.txt
-│   ├── requirements-ai.txt
+│   ├── requirements.txt      # production (Render installs this)
+│   ├── requirements-dev.txt    # pytest (local/CI only)
 │   └── app/
 │       ├── main.py             # FastAPI entry
 │       ├── config/             # Settings (dotenv)
@@ -110,7 +110,8 @@ cp frontend/.env.example frontend/.env
 cd backend
 python -m venv venv
 .\venv\Scripts\activate          # Windows
-pip install -r requirements.txt -r requirements-ai.txt
+pip install -r requirements.txt
+# tests: pip install -r requirements-dev.txt
 
 # DB migration (optional — init_db also runs on startup)
 alembic upgrade head

@@ -1,0 +1,4 @@
+# Local development & CI tests only — not installed on Render
+-r requirements.txt
+
+pytest==8.3.5
