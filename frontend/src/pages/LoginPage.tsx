@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { ApiStatusBanner } from "@/components/features/auth/ApiStatusBanner";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -47,6 +48,8 @@ export function LoginPage() {
             onSubmit={handleSubmit}
             className="space-y-4 rounded-2xl border border-border/60 bg-surface-elevated/90 backdrop-blur-xl p-6 shadow-sm"
           >
+            <ApiStatusBanner />
+
             {error ? (
               <div className="rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-500">
                 {error}

@@ -5,20 +5,20 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://growthpilot-api.onrender.com/api/:path*"
+      "destination": "https://ai-tutor-project-2.onrender.com/api/:path*"
     },
     {
       "source": "/auth/:path*",
-      "destination": "https://growthpilot-api.onrender.com/auth/:path*"
+      "destination": "https://ai-tutor-project-2.onrender.com/auth/:path*"
     },
     {
       "source": "/goal/:path*",
-      "destination": "https://growthpilot-api.onrender.com/goal/:path*"
+      "destination": "https://ai-tutor-project-2.onrender.com/goal/:path*"
     },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "env": {
     "VITE_USE_API_PROXY": "true",
-    "VITE_API_BASE_URL": "https://growthpilot-api.onrender.com"
+    "VITE_API_BASE_URL": "https://ai-tutor-project-2.onrender.com"
   }
 }

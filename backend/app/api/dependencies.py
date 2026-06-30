@@ -63,6 +63,12 @@ def get_timeline_service(db: Session = Depends(get_db)) -> "TimelineService":
     return TimelineService(db)
 
 
+def get_period_roadmap_service(db: Session = Depends(get_db)) -> "PeriodRoadmapService":
+    from app.services.period_roadmap_service import PeriodRoadmapService
+
+    return PeriodRoadmapService(db)
+
+
 def get_current_user(
     token: str = Depends(oauth2_scheme),
     db: Session = Depends(get_db),

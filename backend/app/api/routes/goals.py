@@ -2,10 +2,12 @@
 
 from fastapi import APIRouter, Depends, status
 
-from app.api.dependencies import get_current_user, get_goal_service
+from app.api.dependencies import get_current_user, get_goal_service, get_period_roadmap_service
 from app.infrastructure.database.models.user import User
 from app.schemas.goal import DashboardStats, GoalCreate, GoalResponse, GoalUpdate
+from app.schemas.period_roadmap import PeriodRoadmapResponse
 from app.services.goal_service import GoalService
+from app.services.period_roadmap_service import PeriodRoadmapService
 
 router = APIRouter(tags=["Goals"])
 
@@ -67,3 +69,12 @@ def get_dashboard_stats(
 ) -> DashboardStats:
     """Aggregated growth metrics for the dashboard."""
     return goal_service.get_dashboard_stats(current_user.id)
+
+
+@router.get("/dashboard/period-roadmap", response_model=PeriodRoadmapResponse)
+def get_period_roadmap(
+    current_user: User = Depends(get_current_user),
+    roadmap_service: PeriodRoadmapService = Depends(get_period_roadmap_service),
+) -> PeriodRoadmapResponse:
+    """Daily / weekly / monthly tasks derived from goals, plans, and missions."""
+    return roadmap_service.get_roadmap(current_user.id)

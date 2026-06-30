@@ -5,7 +5,7 @@
 ```
 사용자 → https://your-app.vercel.app  (Vercel)
               ↓ API 호출
-         https://growthpilot-api.onrender.com  (Render)
+         https://ai-tutor-project-2.onrender.com  (Render)
 ```
 
 ---
@@ -41,10 +41,10 @@
 배포 후 API URL 확인 (예):
 
 ```
-https://growthpilot-api.onrender.com
+https://ai-tutor-project-2.onrender.com
 ```
 
-헬스 체크: `https://growthpilot-api.onrender.com/api/v1/health`
+헬스 체크: `https://ai-tutor-project-2.onrender.com/api/v1/health`
 
 > Render Free: 15분 미사용 시 슬립 → 첫 API 요청 30~60초 걸릴 수 있음
 
@@ -68,7 +68,7 @@ https://growthpilot-api.onrender.com
 
 | Key | Value |
 |-----|-------|
-| `VITE_API_BASE_URL` | `https://growthpilot-api.onrender.com` |
+| `VITE_API_BASE_URL` | `https://ai-tutor-project-2.onrender.com` |
 
 (API URL 끝에 `/` 없이, Render 배포 후 실제 URL로 입력)
 
@@ -104,6 +104,7 @@ https://ai-tutor-project-nine.vercel.app
 | API 연결 실패 | Vercel `VITE_API_BASE_URL`이 Render API URL과 일치하는지 확인 |
 | AI mock만 동작 | Render `OPENAI_API_KEY` 설정 후 Manual Deploy |
 | 404 on 새로고침 | `frontend/vercel.json` SPA rewrite 포함 여부 확인 |
+| **This service has been suspended** | API 완전 중지 → [RENDER_SUSPENDED_FIX.md](./RENDER_SUSPENDED_FIX.md) 참고 (새 Render 서비스 + Vercel URL 변경) |
 
 ---
 

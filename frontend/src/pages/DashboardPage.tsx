@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AICoachChat } from "@/components/features/coach/AICoachChat";
 import { HomeProgressOverview } from "@/components/features/home/HomeProgressOverview";
-import { TodayTasksPanel } from "@/components/features/home/TodayTasksPanel";
+import { PeriodGoalsPanel } from "@/components/features/home/PeriodGoalsPanel";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Spinner } from "@/components/ui/Spinner";
 import { mainNavItems } from "@/config/navigation";
@@ -67,7 +67,7 @@ export function DashboardPage() {
         <HomeProgressOverview stats={stats} goals={goals} />
       ) : null}
 
-      <TodayTasksPanel onStatsChange={refresh} refreshKey={tasksRefreshKey} />
+      <PeriodGoalsPanel onStatsChange={refresh} refreshKey={tasksRefreshKey} />
 
       <div>
         <h2 className="text-sm font-medium text-text-muted uppercase tracking-wide mb-3">

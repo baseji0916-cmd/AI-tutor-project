@@ -35,6 +35,13 @@ class OpenAIService:
     def __init__(self, settings: Settings | None = None) -> None:
         self._settings = settings or get_settings()
         self._client: OpenAI | None = None
+        self._client_api_key: str | None = None
+
+    def _reset_client_if_key_changed(self) -> None:
+        current_key = self._settings.openai_api_key.strip()
+        if self._client is not None and self._client_api_key != current_key:
+            self._client = None
+        self._client_api_key = current_key
 
     @property
     def settings(self) -> Settings:
@@ -59,6 +66,8 @@ class OpenAIService:
             raise OpenAIKeyMissingError(
                 "OPENAI_API_KEY is missing. Add it to backend/.env."
             )
+
+        self._reset_client_if_key_changed()
 
         if self._client is None:
             self._client = OpenAI(

@@ -12,7 +12,8 @@ import os
 from functools import lru_cache
 from pathlib import Path
 
-from dotenv import dotenv_values, load_dotenv
+from dotenv import load_dotenv
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Path: backend/app/config/settings.py → project root is 3 levels up
@@ -23,20 +24,23 @@ _PLACEHOLDER_KEYS = {"", "your_api_key", "your-openai-api-key-here"}
 
 
 def _load_env_files() -> None:
-    """Load .env files without placeholder values overriding real secrets."""
-    load_dotenv(BACKEND_DIR / ".env")
-
+    """Load backend/.env then project root .env (root wins for updated secrets)."""
+    load_dotenv(BACKEND_DIR / ".env", override=False)
     root_path = PROJECT_ROOT / ".env"
     if not root_path.exists():
         return
+
+    load_dotenv(root_path, override=True)
+
+    # Skip placeholder values that would wipe a real key from backend/.env
+    from dotenv import dotenv_values
 
     for key, value in dotenv_values(root_path).items():
         if value is None:
             continue
         stripped = value.strip()
         if stripped in _PLACEHOLDER_KEYS:
-            continue
-        os.environ[key] = stripped
+            os.environ.pop(key, None)
 
 
 _load_env_files()
@@ -70,6 +74,13 @@ class Settings(BaseSettings):
     openai_model: str = "gpt-4o-mini"
     openai_timeout_seconds: float = 90.0
     openai_max_retries: int = 2
+
+    @field_validator("openai_api_key", mode="before")
+    @classmethod
+    def strip_openai_api_key(cls, value: object) -> object:
+        if isinstance(value, str):
+            return value.strip()
+        return value
 
     # CORS
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"

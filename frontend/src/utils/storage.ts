@@ -13,7 +13,7 @@ export function clearStoredToken(): void {
 }
 
 /** Render production API (direct calls when proxy is disabled). */
-const PRODUCTION_API_BASE_URL = "https://growthpilot-api.onrender.com";
+const PRODUCTION_API_BASE_URL = "https://ai-tutor-project-2.onrender.com";
 
 export function getApiBaseUrl(): string {
   // Dev + Vercel production proxy: same-origin (/api, /auth, /goal → Render)

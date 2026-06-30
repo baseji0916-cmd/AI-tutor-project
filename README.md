@@ -174,10 +174,10 @@ npm run build
 | Service | URL |
 |---------|-----|
 | **Frontend (Vercel)** | https://ai-tutor-project-nine.vercel.app |
-| **Backend API (Render)** | https://growthpilot-api.onrender.com |
-| **API Base URL** | `https://growthpilot-api.onrender.com` |
-| **Health check** | https://growthpilot-api.onrender.com/api/v1/health |
-| **AI health** | https://growthpilot-api.onrender.com/api/health/ai |
+| **Backend API (Render)** | https://ai-tutor-project-2.onrender.com |
+| **API Base URL** | `https://ai-tutor-project-2.onrender.com` |
+| **Health check** | https://ai-tutor-project-2.onrender.com/api/v1/health |
+| **AI health** | https://ai-tutor-project-2.onrender.com/api/health/ai |
 
 Frontend build uses `VITE_API_BASE_URL` → Render API (see `frontend/.env.production` and `frontend/vercel.json`).
 
@@ -192,7 +192,7 @@ Full guide: **[docs/DEPLOY_VERCEL_RENDER.md](docs/DEPLOY_VERCEL_RENDER.md)**
 ### Quick steps
 
 1. **Render** — Blueprint with `render-api.yaml` → set `OPENAI_API_KEY`
-2. **Vercel** — Import repo, Root Directory `frontend`, env `VITE_API_BASE_URL=https://growthpilot-api.onrender.com`
+2. **Vercel** — Import repo, Root Directory `frontend`, env `VITE_API_BASE_URL=https://ai-tutor-project-2.onrender.com`
 3. Share your **`.vercel.app`** URL
 
 ---
@@ -228,9 +228,9 @@ After deploy succeeds:
 | Service | URL |
 |---------|-----|
 | **Frontend (App)** | `https://growthpilot-web.onrender.com` |
-| **Backend (API)** | `https://growthpilot-api.onrender.com` |
+| **Backend (API)** | `https://ai-tutor-project-2.onrender.com` |
 
-Health check: `https://growthpilot-api.onrender.com/api/v1/health`
+Health check: `https://ai-tutor-project-2.onrender.com/api/v1/health`
 
 > **Note:** Free tier services spin down after inactivity (~50s cold start on first request).
 

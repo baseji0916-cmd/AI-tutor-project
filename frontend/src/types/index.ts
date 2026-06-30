@@ -83,6 +83,49 @@ export interface DashboardStats {
   active_goals: number;
 }
 
+export type PeriodHorizon = "daily" | "weekly" | "monthly";
+
+export type PeriodTaskSource = "mission" | "plan" | "template" | "goal";
+
+export interface PeriodTaskItem {
+  id: string;
+  title: string;
+  description?: string | null;
+  goal_id?: number | null;
+  goal_title?: string | null;
+  status: MissionStatus | "pending" | "completed" | "failed";
+  source: PeriodTaskSource;
+  mission_id?: number | null;
+  scheduled_date?: string | null;
+}
+
+export interface PeriodSection {
+  horizon: PeriodHorizon;
+  label: string;
+  period_label: string;
+  total: number;
+  completed: number;
+  progress_rate: number;
+  is_template: boolean;
+  items: PeriodTaskItem[];
+}
+
+export interface PeriodGoalSummary {
+  id: number;
+  title: string;
+  description?: string | null;
+  progress_rate: number;
+  status: GoalStatus;
+  end_date: string;
+}
+
+export interface PeriodRoadmap {
+  overall_goals: PeriodGoalSummary[];
+  daily: PeriodSection;
+  weekly: PeriodSection;
+  monthly: PeriodSection;
+}
+
 export const GOAL_STATUS_LABELS: Record<GoalStatus, string> = {
   active: "진행 중",
   completed: "완료",

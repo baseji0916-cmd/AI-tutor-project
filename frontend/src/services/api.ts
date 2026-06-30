@@ -49,7 +49,7 @@ export async function apiRequest<T>(
     });
   } catch {
     throw new ApiClientError(
-      "서버에 연결할 수 없습니다. API 서버 상태를 확인해 주세요.",
+      "서버에 연결할 수 없습니다. 로컬: http://127.0.0.1:5173 · Render API Resume 필요",
       0,
     );
   }
