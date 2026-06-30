@@ -8,7 +8,7 @@
 | Backend | Python, FastAPI, SQLAlchemy 2, Alembic |
 | AI | OpenAI API, LangGraph |
 | Database | SQLite |
-| Deploy | [Render](https://render.com) Blueprint |
+| Deploy | [Vercel](https://vercel.com) (frontend) + [Render](https://render.com) (API) — see [docs/DEPLOY_VERCEL_RENDER.md](docs/DEPLOY_VERCEL_RENDER.md) |
 
 ---
 
@@ -168,7 +168,21 @@ npm run build
 
 ---
 
-## Render Deployment
+## Vercel + Render Deployment (Recommended, $0)
+
+**Frontend on Vercel** + **API on Render** — share `https://your-app.vercel.app`
+
+Full guide: **[docs/DEPLOY_VERCEL_RENDER.md](docs/DEPLOY_VERCEL_RENDER.md)**
+
+### Quick steps
+
+1. **Render** — Blueprint with `render-api.yaml` → set `OPENAI_API_KEY`
+2. **Vercel** — Import repo, Root Directory `frontend`, env `VITE_API_BASE_URL=https://growthpilot-api.onrender.com`
+3. Share your **`.vercel.app`** URL
+
+---
+
+## Render Deployment (Full stack on Render)
 
 ### 1. Push to GitHub
 

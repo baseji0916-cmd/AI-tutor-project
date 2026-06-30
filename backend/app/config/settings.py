@@ -73,6 +73,7 @@ class Settings(BaseSettings):
 
     # CORS
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
+    cors_allow_vercel: bool = True
 
     @property
     def cors_origin_list(self) -> list[str]:
@@ -86,6 +87,13 @@ class Settings(BaseSettings):
                 origin = f"https://{origin}"
             origins.append(origin.rstrip("/"))
         return origins
+
+    @property
+    def cors_origin_regex(self) -> str | None:
+        """Allow Vercel preview/production URLs (*.vercel.app)."""
+        if self.cors_allow_vercel:
+            return r"https://.*\.vercel\.app"
+        return None
 
     @property
     def has_openai_api_key(self) -> bool:

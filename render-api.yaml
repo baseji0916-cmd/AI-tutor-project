@@ -1,0 +1,31 @@
+# GrowthPilot — Backend API only (use with Vercel frontend)
+# Deploy: Render Dashboard → New → Blueprint → select this file OR manual Web Service
+#
+# Frontend: deploy `frontend/` on Vercel (see docs/DEPLOY_VERCEL_RENDER.md)
+
+services:
+  - type: web
+    name: growthpilot-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt -r requirements-ai.txt
+    startCommand: bash scripts/start.sh
+    healthCheckPath: /api/v1/health
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: DATABASE_URL
+        value: sqlite:///./growthpilot.db
+      - key: SECRET_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: CORS_ALLOW_VERCEL
+        value: "true"
