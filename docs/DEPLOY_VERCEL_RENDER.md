@@ -81,10 +81,10 @@ https://growthpilot-api.onrender.com
 배포 완료 후 **이 주소를 다른 사람에게 공유**:
 
 ```
-https://<프로젝트명>.vercel.app
+https://ai-tutor-project-nine.vercel.app
 ```
 
-Vercel Dashboard → Project → **Domains** 에서 확인
+(Vercel Dashboard → Project → **Domains** 에서도 확인 가능)
 
 ---
 

@@ -169,6 +169,20 @@ npm run build
 
 ---
 
+## Production URLs (Live)
+
+| Service | URL |
+|---------|-----|
+| **Frontend (Vercel)** | https://ai-tutor-project-nine.vercel.app |
+| **Backend API (Render)** | https://growthpilot-api.onrender.com |
+| **API Base URL** | `https://growthpilot-api.onrender.com` |
+| **Health check** | https://growthpilot-api.onrender.com/api/v1/health |
+| **AI health** | https://growthpilot-api.onrender.com/api/health/ai |
+
+Frontend build uses `VITE_API_BASE_URL` → Render API (see `frontend/.env.production` and `frontend/vercel.json`).
+
+---
+
 ## Vercel + Render Deployment (Recommended, $0)
 
 **Frontend on Vercel** + **API on Render** — share `https://your-app.vercel.app`
